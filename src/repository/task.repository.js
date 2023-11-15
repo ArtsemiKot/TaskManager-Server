@@ -9,4 +9,13 @@ async function getAllTasksDB() {
   return data;
 }
 
-module.exports = { getAllTasksDB };
+async function getTaskByIdDB(id) {
+    const client = await pool.connect();
+    const sql = 'SELECT * FROM tasks WHERE id =$1';
+
+    const data = (await client.query(sql, [id])).rows;
+
+    return data;
+}
+
+module.exports = { getAllTasksDB, getTaskByIdDB };

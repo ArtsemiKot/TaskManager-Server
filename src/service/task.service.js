@@ -1,4 +1,4 @@
-const { getAllTasksDB } = require('../repository/task.repository');
+const { getAllTasksDB, getTaskByIdDB } = require('../repository/task.repository');
 const ExceptionType = require('../exception/exception');
 
 async function getAllTasks() {
@@ -8,4 +8,11 @@ async function getAllTasks() {
   return data;
 }
 
-module.exports = { getAllTasks };
+async function getTaskById(id) {
+    const data = await getTaskByIdDB(id);
+    if (!data.length) throw new Error(ExceptionType.DB_GET_TASK_BY_ID_NOT_FOUND);
+
+    return data;
+}
+
+module.exports = { getAllTasks, getTaskById };
