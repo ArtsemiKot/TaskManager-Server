@@ -11,6 +11,19 @@ const Exceptiontype = {
   DB_PUT_TASK_NOT_UPDATE: 'task does not update',
   DB_PATCH_TASK_NOT_UPDATE: 'task does not patch update',
   DB_DELETE_TASK_NOT_DELETE: 'task does not delete',
+
+  USER_TITLE_EMPTY: 'no data',
+  USER_NAME_INVALID: 'incorrect name',
+  USER_SURNAME_INVALID: 'incorrect surname',
+  USER_PASSWORD_LENGTH_VALID: 'the length must be more than 8 characters',
+  USER_PASSWORD_VALID: 'email entered incorrectly',
+
+  DB_GET_USER_NOT_FOUND: 'table user is empty',
+  DB_GET_USER_BY_ID_NOT_FOUND: 'user by id is not found',
+  DB_POST_USER_NOT_CREATE: 'user does not create',
+  DB_PUT_USER_NOT_UPDATE: 'user does not update',
+  DB_PATCH_USER_NOT_UPDATE: 'user does not patch update',
+  DB_DELETE_USER_NOT_DELETE: 'user does not delete'
 };
 
-module.export = Exceptiontype;
+module.exports = Exceptiontype;

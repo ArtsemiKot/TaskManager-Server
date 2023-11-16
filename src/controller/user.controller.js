@@ -1,6 +1,7 @@
 const express = require('express');
 const { getAllUsers, getUserID, createUsers, updateUserByID, patchUsers, deleteUserById } = require('../service/user.service');
 const { buildResponse } = require('../helper/buildRespone');
+const { isValidUserBody } = require('../helper/validation');
 const route = express.Router();
 
 route.get('/', async (req, res) => {
@@ -22,7 +23,7 @@ route.get('/:id', async (req, res) => {
   }
 });
 
-route.post('/', async (req, res) => {
+route.post('/', isValidUserBody, async (req, res) => {
   try {
     const { name, surname, email, pwd } = req.body;
     const data = await createUsers(name, surname, email, pwd);
@@ -32,7 +33,7 @@ route.post('/', async (req, res) => {
   }
 });
 
-route.put('/:id', async (req, res) => {
+route.put('/:id', isValidUserBody,  async (req, res) => {
   try {
     const { id } = req.params;
     const { name, surname, email, pwd } = req.body;
