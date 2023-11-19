@@ -1,7 +1,7 @@
 const express = require('express');
 const { getAllUsers, getUserID, createUsers, updateUserByID, patchUsers, deleteUserById } = require('../service/user.service');
 const { buildResponse } = require('../helper/buildRespone');
-const { isValidUserBody } = require('../helper/validation');
+const { isValidUserBody, isValidID } = require('../helper/validation');
 const route = express.Router();
 
 route.get('/', async (req, res) => {
@@ -13,7 +13,7 @@ route.get('/', async (req, res) => {
   }
 });
 
-route.get('/:id', async (req, res) => {
+route.get('/:id', isValidID, async (req, res) => {
   try {
     const { id } = req.params;
     const data = await getUserID(id);
@@ -33,7 +33,7 @@ route.post('/', isValidUserBody, async (req, res) => {
   }
 });
 
-route.put('/:id', isValidUserBody,  async (req, res) => {
+route.put('/:id', isValidUserBody, isValidID, async (req, res) => {
   try {
     const { id } = req.params;
     const { name, surname, email, pwd } = req.body;
@@ -43,7 +43,7 @@ route.put('/:id', isValidUserBody,  async (req, res) => {
     buildResponse(res, 404, error.message);
   }
 });
-route.patch('/:id', async (req, res) => {
+route.patch('/:id', isValidID, async (req, res) => {
   try {
     const { id } = req.params;
     const clientObj = req.body;
@@ -54,7 +54,7 @@ route.patch('/:id', async (req, res) => {
   }
 });
 
-route.delete('/:id', async (req, res) => {
+route.delete('/:id', isValidID, async (req, res) => {
   try {
     const { id } = req.params;
     const data = await deleteUserById(id);
