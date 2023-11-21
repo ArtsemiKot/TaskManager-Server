@@ -1,4 +1,11 @@
-const { getAllDataDB, getDataTaskByIdDB, createDataDB, updateTaskByIdDB, patchDataTaskDB, deleteDataTaskDB } = require('../repository/task.repository');
+const {
+  getAllDataDB,
+  getDataTaskByIdDB,
+  createDataDB,
+  updateTaskByIdDB,
+  patchDataTaskDB,
+  deleteDataTaskDB,
+} = require('../repository/task.repository');
 
 const Exceptiontype = require('../exception/exception');
 

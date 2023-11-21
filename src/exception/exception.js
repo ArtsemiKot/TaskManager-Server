@@ -23,7 +23,7 @@ const Exceptiontype = {
   DB_POST_USER_NOT_CREATE: 'user does not create',
   DB_PUT_USER_NOT_UPDATE: 'user does not update',
   DB_PATCH_USER_NOT_UPDATE: 'user does not patch update',
-  DB_DELETE_USER_NOT_DELETE: 'user does not delete'
+  DB_DELETE_USER_NOT_DELETE: 'user does not delete',
 };
 
 module.exports = Exceptiontype;

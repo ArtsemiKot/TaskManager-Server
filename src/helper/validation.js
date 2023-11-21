@@ -11,7 +11,7 @@ function isValidTaskBody(req, res, next) {
 }
 
 function isValidID(req, res, next) {
-  const {id}= req.params;
+  const { id } = req.params;
   if (isNaN(id)) throw new Error(Exceptiontype.ID_NOT_A_NUMBER);
   if (id < 1) throw new Error(Exceptiontype.ID_NEGATIVE);
 
