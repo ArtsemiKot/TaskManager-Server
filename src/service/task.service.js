@@ -3,7 +3,7 @@ const {
   getDataTaskByIdDB,
   createDataDB,
   updateTaskByIdDB,
-  patchDataTaskDB,
+  patchTaskDB,
   deleteDataTaskDB,
 } = require('../repository/task.repository');
 
@@ -33,16 +33,17 @@ async function updateTaskById(id, task, user_id) {
   return data;
 }
 
+async function patchTask(id, clientObj){
+  const data = await patchTaskDB(id, clientObj);
+  if(!data.length) throw new Error (Exceptiontype.DB_PATCH_TASK_NOT_UPDATE);
+  return data;
+}
 async function deleteDataTask(id) {
   const data = await deleteDataTaskDB(id);
   if (!data.length) throw new Error(Exceptiontype.DB_DELETE_TASK_NOT_DELETE);
   return data;
 }
 
-async function patchDataTask(id, clientObj) {
-  const data = await patchDataTaskDB(id, clientObj);
-  if (!data.length) throw new Error(Exceptiontype.DB_PATCH_TASK_NOT_PATCH);
-  return data;
-}
 
-module.exports = { getAllData, createData, deleteDataTask, patchDataTask, getDataTaskById, updateTaskById };
+
+module.exports = { getAllData, createData, deleteDataTask, getDataTaskById, updateTaskById, patchTask };

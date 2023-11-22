@@ -44,22 +44,21 @@ async function updateTaskByIdDB(id, task, user_id) {
     return [];
   }
 }
-async function patchDataTaskDB(id, clientObj) {
+
+async function patchTaskDB(id, clientObj) {
   const client = await pool.connect();
   try {
     await client.query('BEGIN');
-    const sql1 = `select * from tasks where id=$1`;
-    const oldObj = (await client.query(sql1, [id])).rows;
-
+    const sql_select = `select * from tasks where id = $1`;
+    const oldObj = (await client.query(sql_select, [id])).rows;
     const newObj = { ...oldObj[0], ...clientObj };
-
-    const sql2 = `update tasks set task=$1,user_id=$2 where id=$3 returning *`;
-    const result = (await client.query(sql2, [newObj.task, newObj.user_id, id])).rows;
-    await client.query('COMMIT');
-    return result;
+    const sql_update = `update tasks set task = $1, user_id =$2 where id = $3 returning *`;
+    const result_update = (await client.query(sql_update, [newObj.task, newObj.user_id, id])).rows;
+    await client.query('COMMIT')
+    return result_update;
   } catch (error) {
-    await client.query('ROLLBACK');
-    console.log(`patchTaskDB: ${error.message}`);
+    await client.query("ROLLBACK");
+    console.log(`patchTask: ${error.message}`);
     return [];
   }
 }
@@ -79,4 +78,4 @@ async function deleteDataTaskDB(id) {
   }
 }
 
-module.exports = { getAllDataDB, getDataTaskByIdDB, createDataDB, updateTaskByIdDB, patchDataTaskDB, deleteDataTaskDB };
+module.exports = { getAllDataDB, getDataTaskByIdDB, createDataDB, updateTaskByIdDB, patchTaskDB, deleteDataTaskDB };

@@ -1,5 +1,5 @@
 const express = require('express');
-const { getAllData, getDataTaskById, createData, updateTaskById, patchDataTask, deleteDataTask } = require('../service/task.service');
+const { getAllData, getDataTaskById, createData, updateTaskById, patchTask, deleteDataTask } = require('../service/task.service');
 const { buildResponse } = require('../helper/buildRespone');
 const { isValidTaskBody, isValidID } = require('../helper/validation');
 const route = express.Router();
@@ -48,12 +48,12 @@ route.patch('/:id', isValidID, async (req, res) => {
   try {
     const { id } = req.params;
     const clientObj = req.body;
-    const data = await patchDataTask(id, clientObj);
+    const data = await patchTask(id, clientObj);
     buildResponse(res, 200, data);
   } catch (error) {
     buildResponse(res, 404, error.message);
   }
-});
+})
 
 route.delete('/:id', isValidID, async (req, res) => {
   try {

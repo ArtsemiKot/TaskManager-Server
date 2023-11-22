@@ -50,14 +50,15 @@ async function patchUsersDB(id, clientObj) {
   const client = await pool.connect();
   try {
     await client.query('BEGIN');
-    const sql = `select * from users where id = $1`;
-    const oldObj = (await client.query(sql, [id])).rows;
+    const sql_select = `select * from users where id = $1`;
+    const oldObj = (await client.query(sql_select, [id])).rows;
+    console.log(oldObj);
     const newObj = { ...oldObj[0], ...clientObj };
-    const sqlUpdate = `update users set name = $1, surname = $2, email = $3, pwd = $4
+    const sql_update = `update users set name = $1, surname = $2, email = $3, pwd = $4
       where id = $5 returning *`;
-    const result = (await client.query(sqlUpdate, [newObj.name, newObj.surname, newObj.email, newObj.pwd, id])).rows;
+    const result_update = (await client.query(sql_update, [newObj.name, newObj.surname, newObj.email, newObj.pwd, id])).rows;
     await client.query('COMMIT');
-    return result;
+    return result_update;
   } catch (error) {
     await client.query('ROLLBACK');
     console.log(`patchUserDB: ${error.message}`);

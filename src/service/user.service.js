@@ -1,6 +1,6 @@
 const { getAllUsersDB, getUserIDDB, createUsersDB, updateUsersDB, patchUsersDB, deleteUserByIdDB } = require('../repository/user.repository');
 
-const ExceptionType = require('../exception/exception');
+const Exceptiontype = require('../exception/exception');
 async function getAllUsers() {
   const data = await getAllUsersDB();
   if (!data.length) throw new Error(Exceptiontype.DB_GET_USER_NOT_FOUND);
@@ -25,7 +25,7 @@ async function updateUserByID(id, name, surname, email, pwd) {
   return data;
 }
 
-async function patchUsers(id, clientObj) {
+async function patchUserByID(id, clientObj){
   const data = await patchUsersDB(id, clientObj);
   if (!data.length) throw new Error(Exceptiontype.DB_PATCH_USER_NOT_UPDATE);
   return data;
@@ -38,4 +38,4 @@ async function deleteUserById(id) {
   return data;
 }
 
-module.exports = { getAllUsers, getUserID, createUsers, updateUserByID, patchUsers, deleteUserById };
+module.exports = { getAllUsers, getUserID, createUsers, updateUserByID, patchUserByID, deleteUserById };
