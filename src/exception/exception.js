@@ -26,7 +26,9 @@ const Exceptiontype = {
   DB_DELETE_USER_NOT_DELETE: 'user does not delete',
 
   DB_CREATE_USER_BY_EMAIL_NOT_FOUND: 'User has already exist',
-  DB_AUTH_USER_BY_EMAIL: 'Email not found'
+  DB_AUTH_USER_BY_EMAIL: 'Email not found',
+
+  PWD_HASHED_MATCH: 'Password does not match',
 };
 
 module.exports = Exceptiontype;
