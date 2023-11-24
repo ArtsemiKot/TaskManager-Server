@@ -33,7 +33,6 @@ route.post('/', isValidUserBody, async (req, res) => {
   }
 });
 
-
 route.put('/:id', isValidUserBody, isValidID, async (req, res) => {
   try {
     const { id } = req.params;
@@ -48,13 +47,13 @@ route.put('/:id', isValidUserBody, isValidID, async (req, res) => {
 route.patch('/:id', isValidID, async (req, res) => {
   try {
     const { id } = req.params;
-    const  clientObj = req.body;
+    const clientObj = req.body;
     const data = await patchUserByID(id, clientObj);
     buildResponse(res, 200, data);
   } catch (error) {
     buildResponse(res, 404, error.message);
   }
-})
+});
 
 route.delete('/:id', isValidID, async (req, res) => {
   try {

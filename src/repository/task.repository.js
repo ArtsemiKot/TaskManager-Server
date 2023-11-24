@@ -54,10 +54,10 @@ async function patchTaskDB(id, clientObj) {
     const newObj = { ...oldObj[0], ...clientObj };
     const sql_update = `update tasks set task = $1, user_id =$2 where id = $3 returning *`;
     const result_update = (await client.query(sql_update, [newObj.task, newObj.user_id, id])).rows;
-    await client.query('COMMIT')
+    await client.query('COMMIT');
     return result_update;
   } catch (error) {
-    await client.query("ROLLBACK");
+    await client.query('ROLLBACK');
     console.log(`patchTask: ${error.message}`);
     return [];
   }

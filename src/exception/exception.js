@@ -24,6 +24,9 @@ const Exceptiontype = {
   DB_PUT_USER_NOT_UPDATE: 'user does not update',
   DB_PATCH_USER_NOT_UPDATE: 'user does not patch update',
   DB_DELETE_USER_NOT_DELETE: 'user does not delete',
+
+  DB_CREATE_USER_BY_EMAIL_NOT_FOUND: 'User has already exist',
+  DB_AUTH_USER_BY_EMAIL: 'Email not found'
 };
 
 module.exports = Exceptiontype;

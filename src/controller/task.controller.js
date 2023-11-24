@@ -53,7 +53,7 @@ route.patch('/:id', isValidID, async (req, res) => {
   } catch (error) {
     buildResponse(res, 404, error.message);
   }
-})
+});
 
 route.delete('/:id', isValidID, async (req, res) => {
   try {

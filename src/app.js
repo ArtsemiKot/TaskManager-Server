@@ -1,11 +1,10 @@
 const express = require('express');
-const cors = require('cors')
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const user = require('./controller/user.controller');
 const task = require('./controller/task.controller');
-const api = require('./controller/api.controller')
+const api = require('./controller/api.controller');
 const app = express();
-
 
 app.use(cors());
 app.use(bodyParser.json());
